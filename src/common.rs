@@ -1046,7 +1046,7 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    "https://admin.rustdesk.com".to_owned()
+    "http://8.137.35.138".to_owned()
 }
 
 #[inline]
@@ -1617,9 +1617,6 @@ pub async fn secure_tcp(conn: &mut Stream, key: &str) -> ResultType<()> {
     // as WebSocket Secure (wss://) already provides transport layer encryption.
     // This doesn't affect the end-to-end encryption between clients,
     // it only avoids redundant encryption between client and server.
-    if use_ws() {
-        return Ok(());
-    }
     let rs_pk = get_rs_pk(key);
     let Some(rs_pk) = rs_pk else {
         bail!("Handshake failed: invalid public key from rendezvous server");
